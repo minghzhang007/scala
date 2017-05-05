@@ -1,10 +1,11 @@
 package com.lewis.akka.demo2;
 
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
+
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
-import com.google.common.collect.Lists;
-import com.typesafe.config.ConfigFactory;
 
 /**
  * @author zmh46712
@@ -12,11 +13,10 @@ import com.typesafe.config.ConfigFactory;
  */
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        ActorSystem system = ActorSystem.create("HelloWorldSystem", ConfigFactory.load("akka.config"));
+        Processor.init();
+        Config config = ConfigFactory.load("akka.config");
+        ActorSystem system = ActorSystem.create("HelloWorldSystem", config);
         ActorRef helloWorld = system.actorOf(Props.create(HelloWorld.class), "HelloWorldActor");
-        System.out.println("Hello World Actor Path:"+helloWorld.path());
-       // helloWorld.tell(new Message(3, Lists.newArrayList("nihao","wohao","dajiahao")));
-        Thread.sleep(1000);
-        system.shutdown();
+        System.out.println("Hello World Actor Path:" + helloWorld.path());
     }
 }

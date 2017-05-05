@@ -16,7 +16,7 @@ public class HelloWorld extends UntypedActor {
     public void preStart() throws Exception {
         //create the greeter actor
         ActorRef greeter = getContext().actorOf(Props.create(Greeter.class), "Greeter");
-        System.out.println("HelloWorld preStart当前线程："+Thread.currentThread().getId());
+        System.out.println("HelloWorld preStart当前线程："+Thread.currentThread().getName());
         System.out.println("Greeter Actor Path: " + greeter.path());
         //tell it to perform the greeting
         greeter.tell(new Message(2, Lists.newArrayList("2", "dsf")), getSender());
@@ -26,7 +26,7 @@ public class HelloWorld extends UntypedActor {
     @Override
     public void onReceive(Object message) throws Throwable {
         System.out.println("HelloWorld 收到的数据为：" + JSON.toJSONString(message));
-        System.out.println("[HelloWorld onReceive当前线程]："+Thread.currentThread().getId());
+        System.out.println("[HelloWorld onReceive当前线程]："+Thread.currentThread().getName());
     }
 
     @Override

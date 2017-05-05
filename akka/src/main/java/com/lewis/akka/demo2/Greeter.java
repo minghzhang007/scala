@@ -13,7 +13,7 @@ public class Greeter extends UntypedActor {
     @Override
     public void onReceive(Object message) throws Throwable {
         System.out.println("Greeter收到的数据是：" + JSON.toJSONString(message));
-        System.out.println("【Greeter onReceive当前线程】 "+Thread.currentThread().getId());
+        System.out.println("【Greeter onReceive当前线程】 "+Thread.currentThread().getName());
         getContext().parent().tell("Greeter工作完成", getSelf());
     }
 }
